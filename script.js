@@ -19,9 +19,17 @@ function addTask (){
     let li = document.createElement("li")
     li.innerHTML = inputBox.value;
     listContainer.appendChild(li);
-    let span = document.createElement("span");
-    span.innerHTML = "\u00d7";
-    li.appendChild(span);
+    // let span = document.createElement("span");
+    // span.innerHTML = "\u00d7";
+    // li.appendChild(span);
+
+    let btn = document.createElement("button")
+    btn.innerText = "Удалить элемент"
+    btn.addEventListener('click', () => {
+      listContainer.removeChild(li)
+      saveData()
+  })
+    li.appendChild(btn)
     saveData()
   }
   inputBox.value = "";
@@ -33,10 +41,11 @@ listContainer.addEventListener("click",function(e){
     e.target.classList.toggle("checked")
     saveData()
   }
-  else if (e.target.tagName === "SPAN"){
-    e.target.parentElement.remove();
-    saveData()
-  }
+
+  // else if (e.target.tagName === "SPAN"){
+  //   e.target.parentElement.remove();
+  //   saveData()
+  // }
 }, false);
 
 
@@ -46,7 +55,7 @@ function saveData(){
 
 
 function showTask(){
-  listCoentainer.innerHTML = localStorag.getItem("data")
+  listContainer.innerHTML = localStorage.getItem("data")
 }
 
 showTask();
